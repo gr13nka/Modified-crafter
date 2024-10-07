@@ -41,10 +41,19 @@ def main():
         pygame.K_s: 'move_right',
         pygame.K_w: 'move_up',
         pygame.K_r: 'move_down',
+
+        pygame.K_d: 'move_right',
+        pygame.K_s: 'move_down',
+
+        pygame.K_LEFT: 'move_left',
+        pygame.K_RIGHT: 'move_right',
+        pygame.K_UP: 'move_up',
+        pygame.K_DOWN: 'move_down',
+
         pygame.K_SPACE: 'do',
         pygame.K_TAB: 'sleep',
 
-        pygame.K_d: 'place_stone',
+        pygame.K_y: 'place_stone',
         pygame.K_t: 'place_table',
         pygame.K_f: 'place_furnace',
         pygame.K_p: 'place_plant',
