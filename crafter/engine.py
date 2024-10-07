@@ -32,7 +32,7 @@ class World:
 
     def reset(self, seed=None):
         self.random = np.random.RandomState(seed)
-        self.daylight = 0.0
+        self.daylight = 0.5
         self._chunks = collections.defaultdict(set)
         self._objects = [None]
         self._mat_map = np.zeros(self.area, np.uint8)
@@ -173,12 +173,14 @@ class LocalView:
                     continue
                 texture = self._textures.get(self._world[pos][0], unit)
                 _draw(canvas, np.array([x, y]) * unit, texture)
+
         for obj in self._world.objects:
             pos = obj.pos - self._center + self._offset
             if not _inside((0, 0), pos, self._grid):
                 continue
             texture = self._textures.get(obj.texture, unit)
             _draw_alpha(canvas, pos * unit, texture)
+
         canvas = self._light(canvas, self._world.daylight)
         if player.sleeping:
             canvas = self._sleep(canvas)
@@ -232,7 +234,17 @@ class ItemView:
                 continue
             self._item(canvas, index, item, unit)
             self._amount(canvas, index, amount, unit)
+            # self._days_until_midnight(canvas, index, amount, unit)
         return canvas
+
+    def _days_until_midnight(self, canvas, index, amount, unit):
+        # print(index)
+        # print(unit)
+
+        pos = index, index
+        text = "5"
+        texture = self._textures.get(text, 0.6 * unit)
+        _draw_alpha(canvas, pos, texture)
 
     def _item(self, canvas, index, item, unit):
         pos = index % self._grid[0], index // self._grid[0]

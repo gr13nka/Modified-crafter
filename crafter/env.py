@@ -89,7 +89,8 @@ class Env(BaseClass):
         self._update_time()
         self._player.action = constants.actions[action]
         for obj in self._world.objects:
-            if self._player.distance(obj) < 2 * max(self._view):
+            # Дальность прорисовки экран во все стороны от игрока
+            if self._player.distance(obj) < 2 * max(self._view): 
                 obj.update()
         if self._step % 10 == 0:
             for chunk, objs in self._world.chunks.items():

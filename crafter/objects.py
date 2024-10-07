@@ -274,6 +274,7 @@ class Cow(Object):
     def update(self):
         if self.health <= 0:
             self.world.remove(self)
+        # С вероятностью 50 процентов по нормальному распределению корова ходит в случайную сторону
         if self.random.uniform() < 0.5:
             direction = self.random_dir()
             self.move(direction)
